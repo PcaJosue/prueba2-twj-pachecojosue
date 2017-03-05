@@ -1,0 +1,180 @@
+
+<form *ngIf="menu">
+<div class="jumbotron">
+ 
+ 
+ 
+  <h1>Pastelerías! </h1> 
+ 
+  <p>Registra tus pasteles para compartirlas por la web :) </p>
+  <p><a class="btn btn-primary btn-lg"  (click)="registrarPasteleria()"  role="button">Registra tu Pasteleria</a>
+   <a class="btn btn-primary btn-lg" (click)="listarPastelerias()" role="button">Listar Pastelerias</a> </p>
+ 
+
+</div>
+
+</form>
+
+
+
+  <form *ngIf="crearPasteleriaForm">
+  <h1>Crea Pasteleria</h1>
+  <p>¡Registra tu pasteleria en la aplicación!</p>
+
+  
+        
+      <div class="form-group">
+      <label >nombre: </label>
+      <input   type="text" class="form-control"  placeholder="Nombre" #nombre required>
+    </div>
+    <div class="form-group">
+      <label>Ciudad</label>
+      <input  type="text" class="form-control"  placeholder="Ciudad" #ciudad required>
+    </div>
+    <div class="form-group">
+      <label >Correo</label>
+      <input type="email" class="form-control"   placeholder="Correo" #correo required>
+    </div>
+  <button  (click)="onClick(nombre.value,ciudad.value,correo.value)" class="btn btn-success btn-sm">Agregar Pasteleria!</button>
+ 
+</form>
+
+
+<form *ngIf="listarPasteleriasForm">
+  <h1>Lista de las Pastelerias</h1>
+  <p>¡Edita tu pasteleria en la aplicación!</p>
+<table  class="table table-hover">
+    <th>Nombre</th>
+    <th>Ciudad</th>
+    <th>Correo</th>
+    <th colspan="4" class="text-center">Acciones</th>
+
+    <tr *ngFor="let past of listaPastelerias,let i = index">
+        <td>{{past.nombre}}</td>
+        <td>{{past.ciudad}}</td>
+        <td>{{past.correo}}</td>
+        <td><a (click)="editar(i)"  class="btn btn-success btn-sm" >Editar
+         
+          </a></td>
+        <td>
+                <input type="submit" (click)="borrar(i)" class="btn btn-sm btn-danger" value="Eliminar">
+             
+        </td>
+      <td>
+            <input type="submit" (click)="crearPastelform(i)" class="btn btn-success btn-sm" value="Crear Pastel!" >  
+        </td>
+        <td>
+            <input type="submit" (click)="listarPastelesForm(i)" class="btn btn-success btn-sm" value="Listar Pasteles!" >  
+        </td>
+    </tr>
+    <input type="submit" (click)="aceptar()" class="btn btn-success btn-sm" value="Aceptar">
+    
+</table>
+     </form>
+  
+   <form *ngIf="editElement" >
+     <h1>Editar Pasteleria {{listaPastelerias[editNumber].nombre}}</h1>
+  <p>¡Registra tu pasteleria en la aplicación!</p>
+  
+            <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input  required type="text" class="form-control"  value="{{listaPastelerias[editNumber].nombre}}" #nombreEdit required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Ciudad</label>
+            <input  required type="text" class="form-control"  value="{{listaPastelerias[editNumber].ciudad}}" #ciudadEdit required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Correo</label>
+            <input type="email" class="form-control"  value="{{listaPastelerias[editNumber].correo}}" #correoEdit required>
+          </div>
+          <button (click)="edit(nombreEdit.value,ciudadEdit.value,correoEdit.value)"  class="btn btn-success btn-sm" type="submit" >Editar Pasteleria</button>
+                </form>
+
+
+<form *ngIf="formCrearPastel">
+ <h1>Crea Pastel</h1>
+  <p>¡Registra tu pastel en la aplicación!</p>
+
+  
+    <div class="form-group">
+      <label>Nombre</label>
+      <input required type="text" class="form-control" placeholder="Nombre" #nombrePastel>
+    </div>
+
+    <div class="form-group">
+      <label>Tiempo de Elaboracion</label>
+      <input type="integer" class="form-control" placeholder="Tiempo de elaboracion"#tiempoPastel>
+    </div>
+    
+     <div class="form-group">
+      <label>Foto</label>
+      <input required type="url" class="form-control" placeholder="Url" #url>
+    </div>
+   
+    
+     <button (click)="crearPastel(nombrePastel.value,tiempoPastel.value,url.value)"  class="btn btn-success btn-sm" type="submit" >
+    Guardar Pastel!
+     </button>
+    </form>
+<form *ngIf="formListarPasteles">
+<h1>Lista de los Pasteles de la pasteleria {{listaPastelerias[formListarPastelesNumber].nombre}}</h1>
+    <p>¡Edita tu pastel en la aplicación!</p>
+    <table class="table table-hover">
+        <th>Nombre</th>
+        <th>tiempo de Elaboracion</th>
+        <th>Url Foto</th>
+        <th colspan="2" class="text-center">Acciones</th>
+        
+            <tr *ngFor="let pastel of listaPastelerias[formListarPastelesNumber].pastel,let i=index" >
+                <td>
+                    {{pastel.nombre}}
+                </td>
+                <td>
+                    {{pastel.tiempoDeElaboracion}}
+                </td>
+                <td>
+                   {{pastel.urlFoto}}
+                </td>
+                
+                <td><a (click)="editarPasteleriaForm(formListarPastelesNumber,i)"class="btn btn-success btn-sm">Editar</a></td>
+                <td>
+                    <a (click)="borrarPastel(formListarPastelesNumber,i)"class="btn btn-sm btn-danger">Eliminar</a>
+                    
+                </td>
+            </tr>
+   
+    </table>
+<a (click)="listarPastelesListo()"class="btn btn-success btn-sm">Aceptar</a>
+
+</form>
+
+
+
+
+<form *ngIf="formEditarPasteles">
+<h1>Editar Pastel {{listaPastel[formEditarPastelesPastel].nombre}}</h1>
+  <p>¡Registra tu pastel en la aplicación!</p>
+
+  
+    <div class="form-group">
+      <label>nombre:</label>
+      <input required type="text" class="form-control" value="{{listaPastel[formEditarPastelesPastel].nombre}}" #nombrePastel>
+    </div>
+
+    <div class="form-group">
+      <label>Tiempo de Elaboracion</label>
+      <input type="integer" class="form-control"value="{{listaPastel[formEditarPastelesPastel].tiempoDeElaboracion}}"#tiempoPastel>
+    </div>
+    
+     <div class="form-group">
+      <label>Foto</label>
+      <input required type="url" class="form-control" value="{{listaPastel[formEditarPastelesPastel].urlFoto}}" #url>
+    </div>
+   
+    
+     <button (click)="editarPastel(nombrePastel.value,tiempoPastel.value,url.value)"  class="btn btn-success btn-sm" type="submit" >
+    Guardar Pastel!
+     </button>
+
+  </form>
