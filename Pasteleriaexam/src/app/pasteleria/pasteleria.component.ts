@@ -8,8 +8,8 @@ import {PastelModel} from '../pastel/pastel-model';
   
 })
 export class PasteleriaComponent  {
-  // public listaPastelerias:Array<PasteleriaModel>=[];
-  listaPastelerias:Array<PasteleriaModel>=PastelModel.getListaPasteleria();
+ public listaPastelerias:Array<PasteleriaModel>=[];
+
    editElement:boolean=false;
    editNumber:number=0;
    formcrearPasteNumber:number=0;

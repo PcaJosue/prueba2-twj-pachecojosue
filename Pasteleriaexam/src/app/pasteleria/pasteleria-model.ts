@@ -16,19 +16,7 @@ this.nombre=nombre;
 this.ciudad=ciudad;
 this.correo=correo;
 }
-public setListaPastelerias(nombre:string,ciudad:string,correo:string,pastel:Array<PastelModel>):void{
- 
-this.listaPastelerias.push(new PasteleriaModel(nombre,ciudad,correo,pastel));
 
-}
-
-
-
-public getListaPastelerias():Array<PasteleriaModel>{
-
-return this.listaPastelerias;
-
-}
 
 
 
